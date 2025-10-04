@@ -41,4 +41,12 @@ Thumbs.db
 
 # Temporary files
 *.tmp
+
+# Log files
 *.log
+logs/
+
+# Organized files folders
+Sorted/
+Unsorted/
+organized/

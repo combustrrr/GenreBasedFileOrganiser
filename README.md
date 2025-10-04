@@ -1,15 +1,17 @@
 # GenreBasedFileOrganiser
 
-An AI-powered file organizer that reads and understands document content using NLP. It extracts text from Word, Excel, and PowerPoint files, converts meaning into embeddings via DistilBERT, and clusters similar files using FAISS. This enables automatic genre-based organization—grouping related documents intelligently without relying on filenames or manual sorting.
+An AI-powered file organizer with a user-friendly GUI that reads and understands document content using NLP. It extracts text from Word, Excel, and PowerPoint files, converts meaning into embeddings via DistilBERT, and clusters similar files using FAISS. This enables automatic genre-based organization—grouping related documents intelligently without relying on filenames or manual sorting.
 
 ## Features
 
+- **🖥️ User-Friendly GUI**: Beautiful graphical interface for easy file organization
 - **🤖 AI-Powered Analysis**: Uses DistilBERT transformer model for deep semantic understanding
 - **📄 Multi-Format Support**: Extracts text from `.docx`, `.xlsx`, and `.pptx` files
 - **🎯 Smart Clustering**: Groups similar documents using FAISS-based similarity search
 - **⚡ Efficient Processing**: Fast embedding generation and clustering even for large document sets
 - **🔍 Similar File Search**: Find documents similar to a given file
 - **🎨 Flexible Organization**: Auto-determine optimal clusters or specify custom number
+- **📦 Easy Installation**: Install as a standalone application
 
 ## Installation
 
@@ -17,8 +19,9 @@ An AI-powered file organizer that reads and understands document content using N
 
 - Python 3.8 or higher
 - pip package manager
+- 2GB+ RAM for AI models
 
-### Setup
+### Quick Install
 
 1. Clone the repository:
 ```bash
@@ -26,9 +29,9 @@ git clone https://github.com/combustrrr/GenreBasedFileOrganiser.git
 cd GenreBasedFileOrganiser
 ```
 
-2. Install dependencies:
+2. Install the application:
 ```bash
-pip install -r requirements.txt
+pip install -e .
 ```
 
 3. Verify installation:
@@ -36,11 +39,38 @@ pip install -r requirements.txt
 python check_deps.py
 ```
 
+For detailed installation instructions, including creating desktop shortcuts and building standalone executables, see [INSTALL.md](INSTALL.md).
+
 The first time you run the organizer, it will download the DistilBERT model (~250MB).
 
 ## Usage
 
+### GUI Application (Recommended)
+
+Launch the graphical interface:
+
+```bash
+python main.py
+```
+
+Or use the installed command:
+```bash
+file-organizer-gui
+```
+
+**Using the GUI:**
+1. Click "Browse..." to select a folder containing your documents
+2. Choose the number of groups (or leave as "Auto")
+3. Select whether to copy or move files
+4. Click "Organize Files" to start
+5. Watch the progress in real-time
+6. View results in the "Sorted" folder
+
+![GUI Screenshot](docs/gui-screenshot.png)
+
 ### Command Line Interface
+
+For advanced users or automation:
 
 Basic usage:
 ```bash
@@ -181,6 +211,7 @@ Contributions are welcome! Please feel free to submit a Pull Request.
 
 ## Documentation
 
+- **[INSTALL.md](INSTALL.md)**: Complete installation guide with desktop shortcuts and standalone builds
 - **[QUICKREF.md](QUICKREF.md)**: Quick reference guide for common tasks
 - **[USAGE.md](USAGE.md)**: Comprehensive usage guide with examples
 - **[ARCHITECTURE.md](ARCHITECTURE.md)**: Detailed architecture and design documentation
