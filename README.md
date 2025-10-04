@@ -31,6 +31,11 @@ cd GenreBasedFileOrganiser
 pip install -r requirements.txt
 ```
 
+3. Verify installation:
+```bash
+python check_deps.py
+```
+
 The first time you run the organizer, it will download the DistilBERT model (~250MB).
 
 ## Usage
