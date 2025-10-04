@@ -13,7 +13,7 @@ setup(
     name="genre-based-file-organizer",
     version="1.0.0",
     author="GenreBasedFileOrganiser",
-    description="AI-powered file organizer using NLP and semantic clustering",
+    description="Intelligent file organizer using NLP and semantic clustering",
     long_description=long_description,
     long_description_content_type="text/markdown",
     url="https://github.com/combustrrr/GenreBasedFileOrganiser",

@@ -8,8 +8,8 @@ The Genre-Based File Organizer now features a professional graphical user interf
 
 ```
 ╔══════════════════════════════════════════════════════════════════════╗
-║           AI-Powered Genre-Based File Organizer                      ║
-║    Intelligently organize your documents by content using AI         ║
+║              Genre-Based File Organizer                              ║
+║    Intelligently organize your documents using semantic clustering   ║
 ╠══════════════════════════════════════════════════════════════════════╣
 ║                                                                      ║
 ║  ┌─ Select Folder ────────────────────────────────────────────┐    ║

@@ -7,7 +7,7 @@ This guide provides step-by-step instructions for installing the Genre-Based Fil
 - **Operating System**: Windows, macOS, or Linux
 - **Python**: 3.8 or higher
 - **RAM**: 2GB minimum (4GB recommended)
-- **Disk Space**: 500MB for models and dependencies
+- **Disk Space**: 500MB for DistilBERT model and dependencies
 
 ## Installation Methods
 
@@ -116,7 +116,7 @@ When you run the application for the first time:
    [Desktop Entry]
    Type=Application
    Name=Genre-Based File Organizer
-   Comment=AI-powered document organizer
+   Comment=Intelligent document organizer using semantic clustering
    Exec=/path/to/venv/bin/python /path/to/GenreBasedFileOrganiser/main.py
    Terminal=false
    Categories=Utility;Office;

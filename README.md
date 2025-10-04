@@ -1,13 +1,13 @@
 # GenreBasedFileOrganiser
 
-An AI-powered file organizer with a user-friendly GUI that reads and understands document content using NLP. It extracts text from Word, Excel, and PowerPoint files, converts meaning into embeddings via DistilBERT, and clusters similar files using FAISS. This enables automatic genre-based organization—grouping related documents intelligently without relying on filenames or manual sorting.
+An intelligent file organizer with a user-friendly GUI that reads and understands document content using Natural Language Processing. It extracts text from Word, Excel, and PowerPoint files, converts meaning into embeddings via DistilBERT transformer model, and clusters similar files using FAISS. This enables automatic genre-based organization—grouping related documents by semantic similarity without relying on filenames or manual sorting.
 
 ## Features
 
 - **🖥️ User-Friendly GUI**: Beautiful graphical interface for easy file organization
-- **🤖 AI-Powered Analysis**: Uses DistilBERT transformer model for deep semantic understanding
+- **🧠 Semantic Analysis**: Uses DistilBERT transformer model for deep content understanding
 - **📄 Multi-Format Support**: Extracts text from `.docx`, `.xlsx`, and `.pptx` files
-- **🎯 Smart Clustering**: Groups similar documents using FAISS-based similarity search
+- **🎯 FAISS Clustering**: Groups similar documents using Facebook AI Similarity Search
 - **⚡ Efficient Processing**: Fast embedding generation and clustering even for large document sets
 - **🔍 Similar File Search**: Find documents similar to a given file
 - **🎨 Flexible Organization**: Auto-determine optimal clusters or specify custom number
@@ -65,8 +65,6 @@ file-organizer-gui
 4. Click "Organize Files" to start
 5. Watch the progress in real-time
 6. View results in the "Sorted" folder
-
-![GUI Screenshot](docs/gui-screenshot.png)
 
 ### Command Line Interface
 
@@ -128,13 +126,13 @@ similar = organizer.find_similar_files("example.docx", k=5)
    - Uses the `[CLS]` token representation for document-level embeddings
    - 768-dimensional vectors capture semantic meaning
 
-3. **Clustering**: Groups similar documents using FAISS and K-means
+3. **FAISS Clustering**: Groups similar documents using FAISS and K-means
    - FAISS index enables efficient similarity search
-   - K-means clusters documents into semantic groups
+   - K-means algorithm clusters documents into semantic groups
    - Auto-determines optimal cluster count or accepts custom value
 
-4. **Organization**: Moves/copies files into group folders
-   - Creates folders named `group_0`, `group_1`, etc.
+4. **Organization**: Moves/copies files into cluster folders
+   - Creates folders named `Cluster_0`, `Cluster_1`, etc.
    - Each folder contains semantically similar documents
 
 ## Architecture
@@ -157,7 +155,7 @@ similar = organizer.find_similar_files("example.docx", k=5)
          ▼
 ┌─────────────────┐
 │   DistilBERT    │ (embedding_generator.py)
-│  Embedding Gen  │
+│ Transformer Model│
 │  (768-dim)      │
 └────────┬────────┘
          │
@@ -170,7 +168,7 @@ similar = organizer.find_similar_files("example.docx", k=5)
          ▼
 ┌─────────────────┐
 │  File Organizer │ (file_organizer.py)
-│  Group folders  │
+│ Cluster folders │
 └─────────────────┘
 ```
 
@@ -196,7 +194,7 @@ python example.py
 ## Performance
 
 - **Speed**: Processes ~10-20 documents per minute (depends on document size and hardware)
-- **Accuracy**: DistilBERT provides high-quality semantic understanding
+- **Accuracy**: DistilBERT transformer model provides high-quality semantic understanding
 - **Scalability**: FAISS enables efficient clustering even with thousands of documents
 
 ## Limitations
@@ -220,8 +218,8 @@ Contributions are welcome! Please feel free to submit a Pull Request.
 
 This project is open source and available under the MIT License.
 
-## Acknowledgments
+## Technical Components
 
-- **DistilBERT**: Hugging Face transformers library
-- **FAISS**: Facebook AI Similarity Search
-- **Document Libraries**: python-docx, openpyxl, python-pptx
+- **DistilBERT**: Hugging Face transformer model for text embeddings
+- **FAISS**: Facebook AI Similarity Search for efficient clustering
+- **Document Libraries**: python-docx, openpyxl, python-pptx for text extraction

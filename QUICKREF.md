@@ -96,9 +96,9 @@ python organize.py --help
 
 ## Key Features
 
-- 🤖 AI-powered semantic understanding (DistilBERT)
+- 🧠 Semantic understanding (DistilBERT transformer model)
 - 📄 Multi-format support (Word, Excel, PowerPoint)
-- 🎯 Smart clustering (FAISS + K-means)
+- 🎯 FAISS clustering + K-means algorithm
 - ⚡ Efficient batch processing
 - 🔍 Similarity search
 - 🎨 Auto or manual cluster count

@@ -55,7 +55,7 @@ class FileOrganizerGUI:
         # Title
         title_label = ttk.Label(
             main_frame,
-            text="AI-Powered Genre-Based File Organizer",
+            text="Genre-Based File Organizer",
             font=("Helvetica", 16, "bold")
         )
         title_label.grid(row=0, column=0, columnspan=3, pady=(0, 20))
@@ -63,7 +63,7 @@ class FileOrganizerGUI:
         # Description
         desc_label = ttk.Label(
             main_frame,
-            text="Intelligently organize your documents by content using AI",
+            text="Intelligently organize your documents using semantic clustering",
             font=("Helvetica", 10)
         )
         desc_label.grid(row=1, column=0, columnspan=3, pady=(0, 20))
