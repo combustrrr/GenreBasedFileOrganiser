@@ -181,6 +181,7 @@ Contributions are welcome! Please feel free to submit a Pull Request.
 
 ## Documentation
 
+- **[QUICKREF.md](QUICKREF.md)**: Quick reference guide for common tasks
 - **[USAGE.md](USAGE.md)**: Comprehensive usage guide with examples
 - **[ARCHITECTURE.md](ARCHITECTURE.md)**: Detailed architecture and design documentation
 
