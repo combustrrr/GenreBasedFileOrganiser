@@ -50,3 +50,11 @@ logs/
 Sorted/
 Unsorted/
 organized/
+
+# Build artifacts
+installer_output/
+Output/
+
+# Testing
+test_files/
+test_output/

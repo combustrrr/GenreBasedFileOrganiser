@@ -268,10 +268,18 @@ Contributions are welcome! Please feel free to submit a Pull Request.
 
 ## Documentation
 
-- **[INSTALL.md](INSTALL.md)**: Complete installation guide with desktop shortcuts and standalone builds
+### For Users
+- **[USER_EXPERIENCE.md](USER_EXPERIENCE.md)**: End-user installation and usage experience
 - **[QUICKREF.md](QUICKREF.md)**: Quick reference guide for common tasks
 - **[USAGE.md](USAGE.md)**: Comprehensive usage guide with examples
-- **[ARCHITECTURE.md](ARCHITECTURE.md)**: Detailed architecture and design documentation
+
+### For Developers
+- **[BUILD_EXE.md](BUILD_EXE.md)**: Building standalone executables
+- **[DISTRIBUTION.md](DISTRIBUTION.md)**: Distribution, testing, and release guide
+- **[TEST_CHECKLIST.md](TEST_CHECKLIST.md)**: Pre-release testing checklist
+- **[INSTALL.md](INSTALL.md)**: Developer installation guide
+- **[ARCHITECTURE.md](ARCHITECTURE.md)**: Technical architecture documentation
+- **[GUI_OVERVIEW.md](GUI_OVERVIEW.md)**: GUI design and features
 
 ## License
 
