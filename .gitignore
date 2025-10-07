@@ -58,3 +58,15 @@ Output/
 # Testing
 test_files/
 test_output/
+.pytest_cache/
+.coverage
+htmlcov/
+.tox/
+
+# Distribution
+checksums.json
+*.dmg
+*.AppImage
+*.deb
+*.rpm
+*.spec.bak
