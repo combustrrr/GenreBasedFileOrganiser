@@ -1,10 +1,17 @@
 @echo off
-REM Build script for Windows
-REM This creates the executable and optionally the installer
+REM Build script for Windows - Creates Self-Contained Executable
+REM No Python or dependencies needed for end users!
 
-echo ================================================
-echo Genre-Based File Organizer - Build Script
-echo ================================================
+echo ========================================================
+echo Genre-Based File Organizer - Professional Build System
+echo ========================================================
+echo.
+echo Creating SELF-CONTAINED executable (Chrome/VS Code style)
+echo   - ONE FILE with everything bundled
+echo   - NO Python installation required for users
+echo   - NO dependency installations needed
+echo.
+echo ========================================================
 echo.
 
 REM Check if Python is installed
@@ -44,18 +51,23 @@ if errorlevel 1 (
 )
 
 echo.
-echo ================================================
-echo Build completed successfully!
-echo ================================================
+echo ========================================================
+echo SUCCESS! Self-Contained Executable Created
+echo ========================================================
 echo.
 echo Executable location: dist\GenreFileOrganizer.exe
 echo.
+echo *** THIS .EXE IS COMPLETELY STANDALONE ***
+echo   - Users can run it WITHOUT installing Python
+echo   - All dependencies are BUNDLED INSIDE
+echo   - Just like downloading Chrome or VS Code!
+echo.
 echo Next steps:
-echo   1. Test the executable: dist\GenreFileOrganizer.exe
+echo   1. Test on a clean machine (without Python)
 echo   2. Create installer (optional):
 echo      - Install Inno Setup from https://jrsoftware.org/isdl.php
 echo      - Compile installer.iss with Inno Setup
-echo   3. Distribute the setup file or the exe directly
+echo   3. Distribute the setup file to users
 echo.
 
 pause

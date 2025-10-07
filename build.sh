@@ -1,10 +1,17 @@
 #!/bin/bash
-# Build script for macOS/Linux
-# This creates the executable
+# Build script for macOS/Linux - Creates Self-Contained Executable
+# No Python or dependencies needed for end users!
 
-echo "================================================"
-echo "Genre-Based File Organizer - Build Script"
-echo "================================================"
+echo "========================================================"
+echo "Genre-Based File Organizer - Professional Build System"
+echo "========================================================"
+echo ""
+echo "Creating SELF-CONTAINED executable (Chrome/VS Code style)"
+echo "  - ONE FILE with everything bundled"
+echo "  - NO Python installation required for users"
+echo "  - NO dependency installations needed"
+echo ""
+echo "========================================================"
 echo ""
 
 # Check if Python is installed
@@ -39,13 +46,18 @@ if [ $? -ne 0 ]; then
 fi
 
 echo ""
-echo "================================================"
-echo "Build completed successfully!"
-echo "================================================"
+echo "========================================================"
+echo "SUCCESS! Self-Contained Executable Created"
+echo "========================================================"
 echo ""
 
 if [[ "$OSTYPE" == "darwin"* ]]; then
     echo "Application location: dist/GenreFileOrganizer.app"
+    echo ""
+    echo "*** THIS .APP IS COMPLETELY STANDALONE ***"
+    echo "  - Users can run it WITHOUT installing Python"
+    echo "  - All dependencies are BUNDLED INSIDE"
+    echo "  - Just like downloading Chrome or VS Code!"
     echo ""
     echo "Next steps:"
     echo "  1. Test the app: open dist/GenreFileOrganizer.app"
@@ -53,14 +65,19 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
     echo "     hdiutil create -volname 'Genre File Organizer' \\"
     echo "       -srcfolder dist/GenreFileOrganizer.app \\"
     echo "       -ov -format UDZO GenreFileOrganizer.dmg"
-    echo "  3. Distribute the DMG file"
+    echo "  3. Distribute the DMG file to users"
 else
     echo "Executable location: dist/GenreFileOrganizer"
     echo ""
+    echo "*** THIS BINARY IS COMPLETELY STANDALONE ***"
+    echo "  - Users can run it WITHOUT installing Python"
+    echo "  - All dependencies are BUNDLED INSIDE"
+    echo "  - Just like downloading Chrome or VS Code!"
+    echo ""
     echo "Next steps:"
-    echo "  1. Test the executable: ./dist/GenreFileOrganizer"
-    echo "  2. Create AppImage or package for distribution"
-    echo "  3. Make executable: chmod +x dist/GenreFileOrganizer"
+    echo "  1. Make executable: chmod +x dist/GenreFileOrganizer"
+    echo "  2. Test the executable: ./dist/GenreFileOrganizer"
+    echo "  3. Create AppImage or package for distribution"
 fi
 
 echo ""

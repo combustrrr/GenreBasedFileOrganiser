@@ -15,7 +15,26 @@ An intelligent file organizer with a user-friendly GUI that reads and understand
 
 ## Installation
 
-### Prerequisites
+### For End Users (No Python Required)
+
+**Download the standalone executable** - Just like Chrome or VS Code!
+
+1. Download `GenreFileOrganizer_Setup.exe` (Windows), `.dmg` (macOS), or `.AppImage` (Linux)
+2. Run the installer
+3. Launch the application
+4. **Done!** No Python or dependencies needed
+
+The standalone version includes:
+- ✅ Python interpreter (bundled inside)
+- ✅ All libraries (PyTorch, Transformers, FAISS, etc.)
+- ✅ Complete application
+- ✅ Everything in ONE file
+
+**[Download releases](#)** | **[Build instructions](BUILD_EXE.md)**
+
+### For Developers (Python Required)
+
+#### Prerequisites
 
 - Python 3.8 or higher
 - pip package manager
@@ -134,6 +153,46 @@ similar = organizer.find_similar_files("example.docx", k=5)
 4. **Organization**: Moves/copies files into cluster folders
    - Creates folders named `Cluster_0`, `Cluster_1`, etc.
    - Each folder contains semantically similar documents
+
+## Building Standalone Executable
+
+Create a **single, self-contained executable** - just like Chrome or VS Code!
+
+### Quick Build
+
+**Windows:**
+```batch
+build.bat
+```
+
+**macOS/Linux:**
+```bash
+chmod +x build.sh
+./build.sh
+```
+
+### What You Get
+
+- **ONE FILE** with everything bundled inside
+- **NO Python** installation required for users
+- **ALL dependencies** embedded (PyTorch, Transformers, FAISS, etc.)
+- **Ready to distribute** to anyone
+
+### Output Locations
+
+- Windows: `dist/GenreFileOrganizer.exe`
+- macOS: `dist/GenreFileOrganizer.app`
+- Linux: `dist/GenreFileOrganizer`
+
+### Creating Professional Installer
+
+**Windows (Inno Setup):**
+```bash
+"C:\Program Files (x86)\Inno Setup 6\ISCC.exe" installer.iss
+```
+Output: `installer_output/GenreFileOrganizer_Setup_v1.0.0.exe`
+
+For complete build instructions, see [BUILD_EXE.md](BUILD_EXE.md).
 
 ## Architecture
 

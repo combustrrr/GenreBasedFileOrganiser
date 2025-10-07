@@ -1,6 +1,43 @@
 # Building Standalone Executable
 
-This document explains how to build and distribute a standalone executable (.exe) file for the Genre-Based File Organizer, following professional software development practices.
+This document explains how to build a **single, self-contained executable** for the Genre-Based File Organizer - just like Chrome, VS Code, and other professional software.
+
+## The Professional Approach: Everything in One File
+
+Similar to how you download Chrome or VS Code as a single installer, this build system creates:
+- **One executable file** with everything bundled inside
+- **No separate Python installation** required
+- **No dependency installations** needed
+- **All libraries embedded** - PyTorch, Transformers, FAISS, etc.
+- **Ready to distribute** - users just run the .exe
+
+The executable is **completely self-contained** - it includes:
+- Python interpreter
+- All Python libraries (torch, transformers, faiss, etc.)
+- Your application code
+- GUI framework (Tkinter)
+- All supporting files
+
+### What Users Experience
+
+**Traditional Software** (like Chrome, VS Code):
+1. Download installer
+2. Run installer
+3. Launch application ✓
+
+**Your Software** (with this build system):
+1. Download installer
+2. Run installer
+3. Launch application ✓
+
+**Users will NOT need to:**
+- ❌ Install Python
+- ❌ Install pip packages
+- ❌ Run `pip install` commands
+- ❌ Configure environments
+- ❌ Deal with dependencies
+
+**Everything is bundled inside!** Just like commercial software.
 
 ## Quick Start
 

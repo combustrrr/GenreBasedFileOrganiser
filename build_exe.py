@@ -1,11 +1,18 @@
 """
-Build script for creating standalone executable using PyInstaller.
-Run this script to create a standalone .exe file for Windows.
+Build script for creating a SINGLE, SELF-CONTAINED executable.
+
+Creates a professional executable just like Chrome or VS Code:
+- ONE FILE with everything bundled inside
+- NO Python installation required
+- NO separate dependency installations
+- ALL libraries embedded (PyTorch, Transformers, FAISS, etc.)
+
+Users simply download and run the .exe - that's it!
 
 Usage:
-    python build_exe.py              # Build using spec file
-    python build_exe.py --simple     # Build using simple command
-    python build_exe.py --auto-gui   # Launch auto-py-to-exe GUI
+    python build_exe.py              # Build using spec file (recommended)
+    python build_exe.py --simple     # Quick build
+    python build_exe.py --auto-gui   # Launch GUI build tool
 """
 
 import sys
@@ -18,9 +25,19 @@ script_dir = os.path.dirname(os.path.abspath(__file__))
 
 def build_with_spec():
     """Build using the spec file for advanced configuration."""
-    print("=" * 60)
-    print("Building with spec file (recommended)")
-    print("=" * 60)
+    print("=" * 70)
+    print("Building Self-Contained Executable (Chrome/VS Code style)")
+    print("=" * 70)
+    print("\n📦 Creating ONE file with everything bundled:")
+    print("   ✓ Python interpreter")
+    print("   ✓ All dependencies (PyTorch, Transformers, FAISS, etc.)")
+    print("   ✓ Application code")
+    print("   ✓ GUI framework")
+    print("\n👤 Users will NOT need to install:")
+    print("   ✗ Python")
+    print("   ✗ pip packages")
+    print("   ✗ Any dependencies")
+    print("\n" + "=" * 70)
     
     spec_file = os.path.join(script_dir, 'GenreFileOrganizer.spec')
     
@@ -43,9 +60,11 @@ def build_with_spec():
 
 def build_simple():
     """Build using simple PyInstaller command."""
-    print("=" * 60)
-    print("Building with simple command")
-    print("=" * 60)
+    print("=" * 70)
+    print("Building Self-Contained Executable (Quick Build)")
+    print("=" * 70)
+    print("\n📦 Creating ONE file with everything bundled inside")
+    print("=" * 70)
     
     try:
         import PyInstaller.__main__
@@ -127,22 +146,35 @@ def create_spec_file():
 
 def print_success():
     """Print success message."""
-    print("\n" + "=" * 60)
-    print("Build completed successfully!")
-    print("=" * 60)
-    print(f"\nExecutable location:")
+    print("\n" + "=" * 70)
+    print("✅ BUILD SUCCESSFUL - Self-Contained Executable Created!")
+    print("=" * 70)
+    print("\n🎉 You now have a SINGLE FILE with EVERYTHING bundled:")
+    print("   • Python interpreter")
+    print("   • All libraries (PyTorch, Transformers, FAISS, etc.)")
+    print("   • Your application code")
+    print("   • GUI framework")
+    print("\n📍 Executable location:")
     
     if sys.platform == 'win32':
         exe_path = os.path.join(script_dir, 'dist', 'GenreFileOrganizer.exe')
         print(f"  {exe_path}")
-        print("\nNext steps:")
-        print("  1. Test the executable")
+        print("\n🚀 Distribution Ready:")
+        print("  • This .exe is COMPLETELY STANDALONE")
+        print("  • Users can run it without installing Python")
+        print("  • No dependencies needed - everything is inside!")
+        print("\n📋 Next steps:")
+        print("  1. Test the executable on a clean machine (no Python)")
         print("  2. Create installer with Inno Setup (see installer.iss)")
-        print("  3. Distribute GenreFileOrganizer_Setup.exe")
+        print("  3. Distribute GenreFileOrganizer_Setup.exe to users")
     elif sys.platform == 'darwin':
         app_path = os.path.join(script_dir, 'dist', 'GenreFileOrganizer.app')
         print(f"  {app_path}")
-        print("\nNext steps:")
+        print("\n🚀 Distribution Ready:")
+        print("  • This .app is COMPLETELY STANDALONE")
+        print("  • Users can run it without installing Python")
+        print("  • No dependencies needed - everything is inside!")
+        print("\n📋 Next steps:")
         print("  1. Test the app")
         print("  2. Create DMG: hdiutil create -volname 'Genre File Organizer' \\")
         print("              -srcfolder dist/GenreFileOrganizer.app \\")
@@ -150,12 +182,17 @@ def print_success():
     else:
         exe_path = os.path.join(script_dir, 'dist', 'GenreFileOrganizer')
         print(f"  {exe_path}")
-        print("\nNext steps:")
+        print("\n🚀 Distribution Ready:")
+        print("  • This binary is COMPLETELY STANDALONE")
+        print("  • Users can run it without installing Python")
+        print("  • No dependencies needed - everything is inside!")
+        print("\n📋 Next steps:")
         print("  1. Test the executable: ./dist/GenreFileOrganizer")
         print("  2. Create AppImage or package for distribution")
     
-    print("\nNote: First run will download DistilBERT model (~250MB)")
-    print("=" * 60)
+    print("\n💡 Note: First run downloads DistilBERT model (~250MB)")
+    print("   After that, model is cached - no downloads needed!")
+    print("=" * 70)
 
 
 def print_usage():

@@ -1,7 +1,16 @@
 # -*- mode: python ; coding: utf-8 -*-
 """
 PyInstaller spec file for Genre-Based File Organizer.
-This file provides advanced configuration for building the executable.
+
+This creates a SINGLE, SELF-CONTAINED executable - just like Chrome or VS Code.
+Everything is bundled inside one file:
+- Python interpreter
+- All dependencies (PyTorch, Transformers, FAISS, scikit-learn, etc.)
+- Application code
+- GUI framework (Tkinter)
+- Supporting files
+
+Users don't need to install Python or any dependencies - just run the .exe!
 """
 
 block_cipher = None
