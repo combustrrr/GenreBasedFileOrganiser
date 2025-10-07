@@ -1,8 +1,25 @@
 # Building Standalone Executable
 
-This document explains how to build and distribute a standalone executable (.exe) file for the Genre-Based File Organizer.
+This document explains how to build and distribute a standalone executable (.exe) file for the Genre-Based File Organizer, following professional software development practices.
 
-## Prerequisites
+## Quick Start
+
+### Windows
+```batch
+build.bat
+```
+
+### macOS/Linux
+```bash
+chmod +x build.sh
+./build.sh
+```
+
+## Method 1: Using PyInstaller with Spec File (Recommended)
+
+This method uses a pre-configured spec file for professional builds.
+
+### Prerequisites
 
 1. Install PyInstaller:
 ```bash
@@ -14,192 +31,425 @@ pip install pyinstaller
 pip install -r requirements.txt
 ```
 
-## Building the Executable
+### Building
 
-### Method 1: Using the Build Script (Recommended)
-
-Simply run the build script:
-
+**Option A: Using build script (Recommended)**
 ```bash
 python build_exe.py
 ```
 
-This will:
-- Create a standalone executable in the `dist/` folder
-- Bundle all required dependencies
-- Create a single file that can be distributed
+**Option B: Using spec file directly**
+```bash
+pyinstaller GenreFileOrganizer.spec
+```
 
-**Output:**
+**Option C: Simple build**
+```bash
+python build_exe.py --simple
+```
+
+### Output
 - Windows: `dist/GenreFileOrganizer.exe`
 - macOS: `dist/GenreFileOrganizer.app`
 - Linux: `dist/GenreFileOrganizer`
 
-### Method 2: Manual PyInstaller Command
+## Method 2: Using auto-py-to-exe (GUI Interface)
 
-For Windows:
+For users who prefer a graphical interface:
+
+### Installation
 ```bash
-pyinstaller --name=GenreFileOrganizer --onefile --windowed ^
-  --collect-all=transformers --collect-all=torch ^
-  --hidden-import=sklearn.utils._weight_vector ^
-  --hidden-import=sklearn.neighbors._typedefs ^
-  --hidden-import=sklearn.tree._utils ^
-  main.py
+pip install auto-py-to-exe
 ```
 
-For macOS/Linux:
+### Launch GUI
 ```bash
-pyinstaller --name=GenreFileOrganizer --onefile --windowed \
-  --collect-all=transformers --collect-all=torch \
-  --hidden-import=sklearn.utils._weight_vector \
-  --hidden-import=sklearn.neighbors._typedefs \
-  --hidden-import=sklearn.tree._utils \
-  main.py
+python build_exe.py --auto-gui
+# OR
+auto-py-to-exe
 ```
 
-## Distribution
+### Configuration in GUI
+1. **Script Location**: Browse to `main.py`
+2. **One File**: Select "One File"
+3. **Console Window**: Select "Window Based (hide the console)"
+4. **Icon**: (Optional) Add an icon file
+5. **Additional Files**: Add `README.md`
+6. **Hidden Imports**: Add:
+   - `sklearn.utils._weight_vector`
+   - `sklearn.neighbors._typedefs`
+   - `sklearn.tree._utils`
+7. Click **"CONVERT .PY TO .EXE"**
 
-### For Windows Users
+## Method 3: Creating a Windows Installer (Inno Setup)
 
-1. Build the executable using the instructions above
-2. The file `GenreFileOrganizer.exe` will be in the `dist/` folder
-3. Distribute this single .exe file
-4. Users can double-click to run (no Python installation needed)
+After building the executable, create a professional installer.
 
-**Important Notes:**
-- First run will download DistilBERT model (~250MB from internet)
-- Executable size: ~100-200MB (includes Python + dependencies)
-- Windows may show security warning (normal for unsigned executables)
+### Prerequisites
+1. Build the executable first (see Method 1)
+2. Download and install Inno Setup: https://jrsoftware.org/isdl.php
 
-### For macOS Users
+### Creating Installer
 
-1. Build using the build script
-2. Distribute `GenreFileOrganizer.app` from the `dist/` folder
-3. Users can drag to Applications folder
-4. May need to allow in Security & Privacy settings
+1. **Compile the installer script:**
+   - Open Inno Setup Compiler
+   - Open `installer.iss`
+   - Click Build → Compile
+   - OR use command line:
+     ```bash
+     "C:\Program Files (x86)\Inno Setup 6\ISCC.exe" installer.iss
+     ```
 
-### For Linux Users
+2. **Output:**
+   - `installer_output/GenreFileOrganizer_Setup_v1.0.0.exe`
 
-1. Build the executable
-2. Distribute the `GenreFileOrganizer` file from `dist/`
-3. Users need to make it executable: `chmod +x GenreFileOrganizer`
-4. Run with: `./GenreFileOrganizer`
+3. **Features:**
+   - Professional installation wizard
+   - Desktop shortcut creation
+   - Start menu integration
+   - Uninstaller included
+   - Version information
+   - License agreement
 
-## File Size Reduction
+### Customizing the Installer
 
-The executable can be large (~100-200MB). To reduce size:
+Edit `installer.iss` to customize:
+- Application name and version
+- Installation directory
+- File associations
+- Registry entries
+- Custom icons
 
-1. **Use UPX compression** (optional):
-```bash
-pip install pyinstaller[encryption]
+## Advanced Configuration
+
+### Spec File Customization
+
+Edit `GenreFileOrganizer.spec` to:
+
+**Add data files:**
+```python
+datas=[
+    ('README.md', '.'),
+    ('config.ini', '.'),
+    ('icons/*', 'icons'),
+],
 ```
 
-Add `--upx-dir=/path/to/upx` to PyInstaller command
-
-2. **Exclude unnecessary modules**:
-Already done in build script (excludes matplotlib, pandas)
-
-3. **Consider installer package**:
-Use NSIS (Windows), DMG (macOS), or AppImage (Linux) for better compression
-
-## Creating an Installer (Advanced)
-
-### Windows Installer (NSIS)
-
-1. Install NSIS: https://nsis.sourceforge.io/
-2. Create installer script (see `installer.nsi` example below)
-3. Compile with NSIS
-
-Example `installer.nsi`:
-```nsis
-!define APPNAME "Genre File Organizer"
-!define COMPANYNAME "GenreOrganizer"
-!define DESCRIPTION "Intelligent document organizer using semantic clustering"
-!define VERSIONMAJOR 1
-!define VERSIONMINOR 0
-!define VERSIONBUILD 0
-
-OutFile "GenreFileOrganizer_Setup.exe"
-InstallDir "$PROGRAMFILES\${APPNAME}"
-
-Page directory
-Page instfiles
-
-Section "Install"
-    SetOutPath $INSTDIR
-    File "dist\GenreFileOrganizer.exe"
-    WriteUninstaller "$INSTDIR\uninstall.exe"
-    
-    CreateShortCut "$DESKTOP\Genre File Organizer.lnk" "$INSTDIR\GenreFileOrganizer.exe"
-    CreateShortCut "$SMPROGRAMS\Genre File Organizer.lnk" "$INSTDIR\GenreFileOrganizer.exe"
-SectionEnd
-
-Section "Uninstall"
-    Delete "$INSTDIR\GenreFileOrganizer.exe"
-    Delete "$INSTDIR\uninstall.exe"
-    Delete "$DESKTOP\Genre File Organizer.lnk"
-    Delete "$SMPROGRAMS\Genre File Organizer.lnk"
-    RMDir "$INSTDIR"
-SectionEnd
+**Add hidden imports:**
+```python
+hiddenimports=[
+    'your.module.here',
+],
 ```
 
-### macOS DMG
+**Add/remove exclusions:**
+```python
+excludes=[
+    'matplotlib',
+    'pandas',
+],
+```
+
+**Add an icon:**
+```python
+icon='app.ico',
+```
+
+### Version Information
+
+The `version_info.txt` file contains Windows version metadata:
+- File version
+- Product version
+- Company name
+- File description
+- Copyright
+
+Edit this file to update version information.
+
+## Building for Different Platforms
+
+### Windows (.exe)
 
 ```bash
-# Create DMG file
+# On Windows machine
+python build_exe.py
+```
+
+Creates: `dist/GenreFileOrganizer.exe`
+
+**Installer (Inno Setup):**
+```bash
+# After building .exe
+"C:\Program Files (x86)\Inno Setup 6\ISCC.exe" installer.iss
+```
+
+Creates: `installer_output/GenreFileOrganizer_Setup_v1.0.0.exe`
+
+### macOS (.app)
+
+```bash
+# On macOS machine
+python build_exe.py
+```
+
+Creates: `dist/GenreFileOrganizer.app`
+
+**DMG Creation:**
+```bash
 hdiutil create -volname "Genre File Organizer" \
   -srcfolder dist/GenreFileOrganizer.app \
   -ov -format UDZO GenreFileOrganizer.dmg
 ```
 
-### Linux AppImage
+### Linux (Binary)
 
-Use `pyinstaller-appimage` or create manually with `appimagetool`
+```bash
+# On Linux machine
+python build_exe.py
+```
+
+Creates: `dist/GenreFileOrganizer`
+
+**AppImage Creation:**
+Use `appimagetool` or create a package for your distribution.
+
+## File Size Optimization
+
+### Basic Optimization (Already Applied)
+- Excluded matplotlib, pandas, IPython
+- Using --onefile for single executable
+- UPX compression enabled
+
+### Additional Optimization
+
+**1. Exclude more unused modules:**
+Edit spec file, add to `excludes`:
+```python
+excludes=[
+    'matplotlib',
+    'pandas',
+    'IPython',
+    'jupyter',
+    'PIL',
+],
+```
+
+**2. Use UPX compression:**
+Already enabled in spec file. For manual control:
+```bash
+pip install pyinstaller[encryption]
+```
+
+**3. Exclude unnecessary torch components:**
+If file size is too large, consider using CPU-only torch:
+```bash
+pip uninstall torch
+pip install torch --index-url https://download.pytorch.org/whl/cpu
+```
+
+## Distribution Guide
+
+### For Windows Users
+
+**Option 1: Installer (Recommended)**
+1. Build exe: `python build_exe.py`
+2. Create installer: Compile `installer.iss`
+3. Distribute: `GenreFileOrganizer_Setup_v1.0.0.exe`
+4. Users run installer → application installs
+
+**Option 2: Standalone EXE**
+1. Build exe: `python build_exe.py`
+2. Zip the exe if needed
+3. Distribute: `GenreFileOrganizer.exe`
+4. Users extract and run
+
+### For macOS Users
+
+**Option 1: DMG (Recommended)**
+1. Build app: `python build_exe.py`
+2. Create DMG: `hdiutil create ...`
+3. Distribute: `GenreFileOrganizer.dmg`
+4. Users open DMG → drag to Applications
+
+**Option 2: App Bundle**
+1. Build app: `python build_exe.py`
+2. Zip: `zip -r GenreFileOrganizer.zip dist/GenreFileOrganizer.app`
+3. Distribute zip file
+
+### For Linux Users
+
+**Option 1: AppImage**
+1. Build binary
+2. Create AppImage with `appimagetool`
+3. Distribute AppImage
+4. Users make executable and run
+
+**Option 2: Distribution Package**
+1. Create .deb or .rpm package
+2. Distribute package
+3. Users install via package manager
+
+## Testing the Build
+
+### Pre-Distribution Checklist
+
+- [ ] Test on clean machine without Python
+- [ ] Test with different file types (.docx, .xlsx, .pptx)
+- [ ] Test with various folder sizes (10, 100, 1000 files)
+- [ ] Verify model download works on first run
+- [ ] Check logging functionality
+- [ ] Test GUI responsiveness
+- [ ] Verify error handling
+- [ ] Check file organization accuracy
+
+### Clean Machine Testing
+
+**Windows:**
+1. Create Windows VM or use clean Windows PC
+2. Do NOT install Python
+3. Run the installer or .exe
+4. Test all functionality
+
+**macOS:**
+1. Create macOS VM or use clean Mac
+2. Do NOT install Python
+3. Install .app or open DMG
+4. Test all functionality
+
+**Linux:**
+1. Use Docker or VM
+2. Do NOT install Python
+3. Run binary or AppImage
+4. Test all functionality
 
 ## Troubleshooting
 
-### "Failed to execute script" error
-- Make sure all dependencies are included
-- Check `--hidden-import` flags for missing modules
-- Run executable from command line to see error details
+### Common Build Errors
 
-### Large file size
-- Executable includes Python interpreter and all dependencies
-- Normal size: 100-200MB
-- Use compression or installer for distribution
+**"Failed to execute script" error:**
+```bash
+# Solution: Add hidden imports
+# Edit GenreFileOrganizer.spec, add to hiddenimports list
+```
 
-### Anti-virus false positives
-- Common with PyInstaller executables
-- Consider code signing certificate (Windows)
-- Submit to anti-virus vendors for whitelisting
+**"Module not found" during build:**
+```bash
+# Solution: Add to hidden imports or collect-all
+# Edit spec file
+```
 
-### Model download on first run
-- Executable needs internet connection on first run
-- Downloads DistilBERT model (~250MB)
-- Cached for subsequent runs
+**Large file size (>500MB):**
+```bash
+# Solution 1: Exclude unused modules
+# Solution 2: Use CPU-only torch
+# Solution 3: Remove transformers cache before building
+```
 
-## Pre-built Executables
+### Runtime Errors
 
-If you don't want to build yourself, request pre-built executables:
+**"Model download failed":**
+```bash
+# Ensure internet connection on first run
+# Model will be cached: ~/.cache/huggingface/
+```
 
-1. Check the Releases page on GitHub
-2. Download for your platform:
-   - Windows: `GenreFileOrganizer_Windows.exe`
-   - macOS: `GenreFileOrganizer_macOS.dmg`
-   - Linux: `GenreFileOrganizer_Linux.AppImage`
+**"Permission denied":**
+```bash
+# Windows: Run as Administrator
+# macOS/Linux: chmod +x GenreFileOrganizer
+```
 
-## Testing the Executable
+**Anti-virus false positive:**
+```bash
+# Common with PyInstaller executables
+# Solution: Code signing (Windows) or submit to AV vendors
+```
 
-Before distribution:
+## Code Signing (Optional but Recommended)
 
-1. Test on a clean machine without Python
-2. Test with different file types
-3. Test with various folder sizes
-4. Verify model download works
-5. Check logging functionality
+### Windows Code Signing
+1. Obtain code signing certificate
+2. Sign exe: `signtool sign /f cert.pfx /p password GenreFileOrganizer.exe`
+3. Benefits: Removes security warnings, trusted by Windows
+
+### macOS Code Signing
+1. Enroll in Apple Developer Program
+2. Get certificate from Apple
+3. Sign app: `codesign --deep --force --verify --verbose --sign "Developer ID" GenreFileOrganizer.app`
+4. Notarize for macOS 10.15+
+
+## Continuous Integration
+
+### GitHub Actions Example
+
+```yaml
+name: Build Executables
+
+on: [push, release]
+
+jobs:
+  build-windows:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-python@v2
+        with:
+          python-version: '3.10'
+      - run: pip install -r requirements.txt
+      - run: pip install pyinstaller
+      - run: python build_exe.py
+      - uses: actions/upload-artifact@v2
+        with:
+          name: windows-exe
+          path: dist/GenreFileOrganizer.exe
+  
+  build-macos:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-python@v2
+        with:
+          python-version: '3.10'
+      - run: pip install -r requirements.txt
+      - run: pip install pyinstaller
+      - run: python build_exe.py
+      - uses: actions/upload-artifact@v2
+        with:
+          name: macos-app
+          path: dist/GenreFileOrganizer.app
+```
 
 ## Support
 
 For build issues:
-- Ensure PyInstaller version: `pip install --upgrade pyinstaller`
-- Check PyInstaller docs: https://pyinstaller.readthedocs.io/
+- Check PyInstaller documentation: https://pyinstaller.readthedocs.io/
 - Review build logs in `build/` folder
+- Test with `--simple` flag first
+- Check hidden imports for missing modules
+
+## Summary
+
+**Quick Build Commands:**
+```bash
+# Standard build
+python build_exe.py
+
+# Simple build
+python build_exe.py --simple
+
+# GUI build tool
+python build_exe.py --auto-gui
+
+# Using spec file directly
+pyinstaller GenreFileOrganizer.spec
+
+# Create Windows installer
+# (After building exe)
+"C:\Program Files (x86)\Inno Setup 6\ISCC.exe" installer.iss
+```
+
+**Output Locations:**
+- Executable: `dist/GenreFileOrganizer.exe` (Windows)
+- Installer: `installer_output/GenreFileOrganizer_Setup_v1.0.0.exe`
+- Build files: `build/` (can be deleted)
+- Spec file: `GenreFileOrganizer.spec` (keep for rebuilds)
